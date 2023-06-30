@@ -1,7 +1,11 @@
 <?php 
+  include("includes/classes/Account.php");
 
-include("includes/handlers/register-handler.php");
-include("includes/handlers/login-handler.php");
+  $account = new Account();
+  $account->register();
+  
+  include("includes/handlers/register-handler.php");
+  include("includes/handlers/login-handler.php");
 
 
 ?>

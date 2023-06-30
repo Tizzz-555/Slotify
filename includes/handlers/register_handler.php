@@ -18,25 +18,6 @@ function sanitizeFormString($inputText) {
   return $inputText;
 }
 
-function validateUsername($un) {
-
-}
-
-function validateFirstName($fn) {
-
-}
-
-function validateLastName($ln) {
-
-}
-
-function validateEmails($em, $em2) {
-
-}
-
-function validatePasswords($pw, $pw2) {
-
-}
 
 
 if (isset($_POST["registerButton"])) {
@@ -49,13 +30,7 @@ if (isset($_POST["registerButton"])) {
   $password = sanitizeFormPassword($_POST['password']);
   $password2 = sanitizeFormPassword($_POST['password2']);
 
-  validateUsername($username);
-  validateFirstName($firstName);
-  validateLastName($lastName);
-  validateEmails($email, $email2);
-  validatePasswords($password, $password2);
-
-
+  
 } 
 
 ?>
