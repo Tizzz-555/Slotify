@@ -14,7 +14,7 @@ function sanitizeFormUsername($inputText) {
 function sanitizeFormString($inputText) {
   $inputText = strip_tags($inputText);
   $inputText = str_replace(" ", "", $inputText);
-  $firstName = ucfirst(strtolower($inputText));
+  $inputText = ucfirst(strtolower($inputText));
   return $inputText;
 }
 
