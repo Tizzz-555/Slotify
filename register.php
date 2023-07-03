@@ -28,13 +28,31 @@
   <script src="assets/js/register.js"></script>
 </head>
 <body>
+  <?php
+  if(isset($_POST['registerButton'])) {
+    echo '<script>
+            $(document).ready(function () {
+              $("#loginForm").hide();
+              $("#registerForm").show();
+            });
+          </script>';
+  } else {
+    echo '<script>
+            $(document).ready(function () {
+              $("#loginForm").show();
+              $("#registerForm").hide();
+            });
+          </script>';
+  }
+  ?>
+  
   <div id="background">
 
     <div id="loginContainer">
       
       <div id="inputContainer">
         <form id="loginForm" action="register.php" method="POST">
-          <h2>Login to your Account</h2>
+          <h2>Login to your account</h2>
           <p>
             <?php echo $account->getError(Constants::$loginFailed); ?>
             <label for="loginUsername">Username</label>
@@ -56,7 +74,7 @@
 
 
         <form id="registerForm" action="register.php" method="POST">
-          <h2>Create your freeAccount</h2>
+          <h2>Create your free account</h2>
           <p>
             <?php echo $account->getError(Constants::$usernameCharacters); ?>
             <?php echo $account->getError(Constants::$usernameTaken); ?>
