@@ -77,7 +77,7 @@
       </p>
 
       <p>
-        <label for="passwordw">Confirm password</label>
+        <label for="password2">Confirm password</label>
         <input id="password2" name="password2" type="password" placeholder="Your password"required>
       </p>
 
