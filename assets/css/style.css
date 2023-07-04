@@ -170,6 +170,10 @@ body {
   width: 52px;
 }
 
+.logo {
+  margin-bottom: 15px;
+}
+
 .navBar .group {
   border-top: 1px solid #a0a0a0;
   padding: 10px 0;
@@ -182,4 +186,16 @@ body {
   display: block;
   letter-spacing: 1px;
   position: relative;
+}
+
+.navItemLink {
+  color: #a0a0a0;
+  text-decoration: none;
+}
+
+.navItemLink .icon {
+  position: absolute;
+  right: 0;
+  top: 6px;
+  width: 25px;
 }
