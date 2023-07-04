@@ -1,5 +1,1 @@
-# exclude everything
-assets/music*
-
-# exception to the rule
-!assets/music/.gitkeep 
+assets/music
