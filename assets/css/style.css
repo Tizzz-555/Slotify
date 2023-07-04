@@ -7,9 +7,14 @@ body {
 #nowPlayingBarContainer {
   width: 100%;
   background-color: #282828;
-
   bottom: 0;
   position: fixed;
   min-width: 620px;
-  height: 100px; /* remove later */
+}
+
+#nowPlayingBar {
+  display: flex;
+  height: 90px;
+  padding: 16px;
+  box-sizing: border-box;
 }
