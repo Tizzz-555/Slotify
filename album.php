@@ -7,12 +7,12 @@ else {
   header("Location: index.php");
 }
 
-$albumQuery = mysqli_query($con, "SELECT * FROM albums WHERE id='$albumId'");
-$album = mysqli_fetch_array($albumQuery);
 
-$artist = new Artist($con, $album['artist']);
+$album = new Album($con, $albumId);
 
-echo $album['title'] . "<br>";
+$artist = $album->getArtist();
+
+echo $album->getTitle() . "<br>";
 echo $artist->getName();
 
 ?>
