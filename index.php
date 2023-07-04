@@ -26,7 +26,11 @@
       <div id="nowPlayingBar">
 
       <div id="nowPlayingLeft">
-
+        <div class="content">
+          <span class="albumLink">
+            <img src="https://images.squarespace-cdn.com/content/v1/54905286e4b050812345644c/96425435-99a3-46c5-bb1a-936c1f0837e1/Square.jpg" class="albumArtwork" alt="">
+          </span>
+        </div>
       </div>
 
       <div id="nowPlayingCenter">
