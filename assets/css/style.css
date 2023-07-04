@@ -193,7 +193,11 @@ body {
   text-decoration: none;
 }
 
-.navItemLink .icon {
+.navItemLink:hover {
+  color: #ffffff;
+}
+
+.icon {
   position: absolute;
   right: 0;
   top: 6px;
