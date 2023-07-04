@@ -238,6 +238,10 @@ body {
   width: 100%;
 }
 
+.gridViewItem a {
+  text-decoration: none;
+}
+
 .gridViewInfo {
   font-weight: 300;
   text-align: center;
