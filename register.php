@@ -5,17 +5,19 @@
   include("includes/classes/Account.php");
   include("includes/classes/Constants.php");
 
-  $account = new Account($con);
+  
+  $account = new Account($con); // Create a new instance of the Account class using the $con connection
   
   
   include("includes/handlers/register_handler.php");
   include("includes/handlers/login_handler.php");
 
   function getInputValue($name) {
-    if(isset($_POST[$name])) {
-      echo $_POST[$name];
+    if(isset($_POST[$name])) { // Check if the given name is present as a key in the $_POST array
+      echo $_POST[$name];     // If the name exists, echo its corresponding value from the $_POST array
     }
   }
+  
 ?>
 
 
@@ -30,13 +32,13 @@
 </head>
 <body>
   <?php
-  if(isset($_POST['registerButton'])) {
-    echo '<script>
-            $(document).ready(function () {
-              $("#loginForm").hide();
-              $("#registerForm").show();
-            });
-          </script>';
+ if(isset($_POST['registerButton'])) {
+  echo '<script>
+          $(document).ready(function () {
+            $("#loginForm").hide();
+            $("#registerForm").show();
+          });
+        </script>';
   } else {
     echo '<script>
             $(document).ready(function () {
@@ -45,6 +47,7 @@
             });
           </script>';
   }
+
   ?>
   
   <div id="background">

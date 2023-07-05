@@ -7,11 +7,11 @@
 
   //session_destroy(); LOGOUT
 
-  if(isset($_SESSION['userLoggedIn'])) {
-    $userLoggedIn = $_SESSION['userLoggedIn'];
+  if(isset($_SESSION['userLoggedIn'])) { // Check if the 'userLoggedIn' key is set in the $_SESSION array
+    $userLoggedIn = $_SESSION['userLoggedIn']; // Assign the value of $_SESSION['userLoggedIn'] to $userLoggedIn
   }
   else {
-    header("Location: register.php");
+    header("Location: register.php"); // Redirect the user to the "register.php" page if the 'userLoggedIn' key is not set
   }
 ?>
 
@@ -26,12 +26,6 @@
 </head>
 
 <body>
-
-  <script>
-    var audioElement = new Audio();
-    audioElement.setTrack("assets/music/bensound-acousticbreeze.mp3");
-    audioElement.audio.play();
-  </script>
 
   <div id="mainContainer">
     

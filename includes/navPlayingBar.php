@@ -1,3 +1,22 @@
+<?php
+// Query to select 10 random song IDs from the Songs table
+$songQuery = mysqli_query($con, "SELECT id FROM Songs ORDER BY RAND() LIMIT 10");
+
+$resultArray = array(); // Initialize an empty array to store the song IDs
+
+while ($row = mysqli_fetch_array($songQuery)) {
+  array_push($resultArray, $row['id']); // Push each song ID into the result array
+}
+
+// Convert the array of song IDs to JSON format
+$jsonArray = json_encode($resultArray);
+
+?>
+
+<script>
+  console.log(<?php echo $jsonArray; ?>); // Output the JSON array to the console
+</script>
+
 <div id="nowPlayingBarContainer">
   
     <div id="nowPlayingBar">
