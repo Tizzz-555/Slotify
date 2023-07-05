@@ -10,11 +10,23 @@ while ($row = mysqli_fetch_array($songQuery)) {
 
 // Convert the array of song IDs to JSON format
 $jsonArray = json_encode($resultArray);
-
 ?>
 
 <script>
-  console.log(<?php echo $jsonArray; ?>); // Output the JSON array to the console
+
+$(document).ready(function() {
+  currentPlaylist = <?php echo $jsonArray; ?>;
+  audioElement = new Audio();
+  setTrack(currentPlaylist[0], currentPlaylist, true);
+});
+
+function setTrack(trackId, newPlaylist, play) {
+
+  audioElement.setTrack("assets/music/bensound-clearday.mp3");
+  if(play == true) {
+    audioElement.play();
+  }
+}
 </script>
 
 <div id="nowPlayingBarContainer">
