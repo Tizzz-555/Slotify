@@ -42,8 +42,8 @@ function setTrack(trackId, newPlaylist, play) {
         $(".albumLink img").attr("src", album.artworkPath); 
       });
       
-      audioElement.setTrack(track.path); // Set the audio element's track path to the song's path
-      audioElement.play(); // Play the audio element
+      audioElement.setTrack(track); // Set the audio element's track path to the song's path
+      playSong(); // Play the audio element
   });
   
   if(play) {
@@ -52,6 +52,11 @@ function setTrack(trackId, newPlaylist, play) {
 }
 
 function playSong() {
+
+  if(audioElement.audio.currentTime == 0) {
+    $.post("includes/handlers/ajax/updatePlays.php", { songId: audioElement.currentlyPlaying.id });
+  }
+
   $(".controlButton.play").hide(); 
   $(".controlButton.pause").show(); 
 
