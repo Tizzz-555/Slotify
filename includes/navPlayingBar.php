@@ -18,19 +18,46 @@ $(document).ready(function() {
   currentPlaylist = <?php echo $jsonArray; ?>; // Retrieve the JSON array of song IDs and assign it to the "currentPlaylist" variable
   audioElement = new Audio(); // Create a new Audio object
   setTrack(currentPlaylist[0], currentPlaylist, false); // Call the "setTrack" function with the first song ID from the playlist
+  updateVolumeProgressBar(audioElement.audio);
 
-  $(".playbackBar .progressBar ").mousedown(function() {
+  // SONG PROGRESS CONTROLS
+  $(".playbackBar .progressBar").mousedown(function() {
     mouseDown = true;
   });
 
-  $(".playbackBar .progressBar ").mousemove(function(e) {
-    if(mouseDown) {
+  $(".playbackBar .progressBar").mousemove(function(e) {
+    if(mouseDown == true) {
       timeFromOffset(e, this);
     };
   });
 
-  $(".playbackBar .progressBar ").mouseup(function(e) {    
+  $(".playbackBar .progressBar").mouseup(function(e) {    
     timeFromOffset(e, this);
+  });
+
+  // VOLUME CONTROLS
+  $(".volumeBar .progressBar").mousedown(function() {
+    mouseDown = true;
+  });
+
+  $(".volumeBar .progressBar").mousemove(function(e) {
+    if(mouseDown == true) {
+
+      var percentage = e.offsetX / $(this).width();
+
+      if(percentage >= 0 && percentage <= 1) {
+        audioElement.audio.volume = percentage;
+      }
+      
+    }
+  });
+
+  $(".volumeBar .progressBar").mouseup(function(e) {  
+    var percentage = e.offsetX / $(this).width();  
+
+    if(percentage >= 0 && percentage <= 1) {
+        audioElement.audio.volume = percentage;
+      }
   });
 
   $(document).mouseup(function() {
@@ -151,6 +178,7 @@ function pauseSong() {
               <img src="assets/images/icons/repeat.png" alt="Repeat">
             </button>       
           </div>
+
 
           <div class="playbackBar">
 
