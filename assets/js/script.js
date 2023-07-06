@@ -1,13 +1,23 @@
 var currentPlaylist = [];
 var audioElement;
 
+function formatTime(seconds) {
+  var time = Math.round(seconds);
+  var minutes = Math.floor(time / 60);
+  var seconds = time - minutes * 60;
+
+  var extraZero = seconds < 10 ? "0" : "";
+
+  return minutes + ":" + extraZero + seconds;
+}
 function Audio() {
   this.currentlyPlaying; // Property to store the currently playing track (initially undefined)
   this.audio = document.createElement("audio"); // Creating an HTML audio element using document.createElement
 
   this.audio.addEventListener("canplay", function () {
     // 'this' refers to the object that the event was called on
-    $(".progressTime.remaining").text(this.duration);
+    var duration = formatTime(this.duration);
+    $(".progressTime.remaining").text(duration);
   });
 
   this.setTrack = function (track) {
