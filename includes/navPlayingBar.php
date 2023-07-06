@@ -24,39 +24,44 @@ function setTrack(trackId, newPlaylist, play) {
 
   $.post("includes/handlers/ajax/getSongJson.php", { songId: trackId }, function(data) {
       // Perform an AJAX POST request to get the song details using the trackId
-
       var track = JSON.parse(data); // Parse the JSON response and assign it to the "track" variable
 
       $(".trackName span").text(track.title); // Set the track title in the HTML element with the class "trackName"
 
       $.post("includes/handlers/ajax/getArtistJson.php", { artistId: track.artist }, function(data) {
-        // Perform an AJAX POST request to get the artist details using the artist ID
+        
+        var artist = JSON.parse(data); 
 
-        var artist = JSON.parse(data); // Parse the JSON response and assign it to the "artist" variable
+        $(".artistName span").text(artist.name); 
+      });
 
-        $(".artistName span").text(artist.name); // Set the artist name in the HTML element with the class "artistName"
+      $.post("includes/handlers/ajax/getAlbumJson.php", { albumId: track.album }, function(data) {
+        
+        var album = JSON.parse(data); 
+
+        $(".albumLink img").attr("src", album.artworkPath); 
       });
       
       audioElement.setTrack(track.path); // Set the audio element's track path to the song's path
       audioElement.play(); // Play the audio element
   });
   
-  if(play == true) {
+  if(play) {
     audioElement.play(); // If the "play" parameter is true, play the audio element
   }
 }
 
 function playSong() {
-  $(".controlButton.play").hide(); // Hide the play button
-  $(".controlButton.pause").show(); // Show the pause button
+  $(".controlButton.play").hide(); 
+  $(".controlButton.pause").show(); 
 
-  audioElement.play(); // Play the audio element
+  audioElement.play(); 
 }
 
 function pauseSong() {
-  $(".controlButton.play").show(); // Show the play button
-  $(".controlButton.pause").hide(); // Hide the pause button
-  audioElement.pause(); // Pause the audio element
+  $(".controlButton.play").show(); 
+  $(".controlButton.pause").hide(); 
+  audioElement.pause();
 }
 </script>
 
@@ -68,7 +73,7 @@ function pauseSong() {
       <div id="nowPlayingLeft">
         <div class="content">
           <span class="albumLink">
-            <img src="https://images.squarespace-cdn.com/content/v1/54905286e4b050812345644c/96425435-99a3-46c5-bb1a-936c1f0837e1/Square.jpg" class="albumArtwork" alt="">
+            <img src="" class="albumArtwork" alt="">
           </span>
 
           <div class="trackInfo">
