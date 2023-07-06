@@ -10,6 +10,17 @@ function formatTime(seconds) {
 
   return minutes + ":" + extraZero + seconds;
 }
+
+function updateTimeProgressBar(audio) {
+  $(".progressTime.current").text(formatTime(audio.currentTime));
+  $(".progressTime.remaining").text(
+    formatTime(audio.duration - audio.currentTime)
+  );
+
+  var progress = (audio.currentTime / audio.duration) * 100;
+  $(".playbackBar .progress").css("width", progress + "%");
+}
+
 function Audio() {
   this.currentlyPlaying; // Property to store the currently playing track (initially undefined)
   this.audio = document.createElement("audio"); // Creating an HTML audio element using document.createElement
@@ -18,6 +29,13 @@ function Audio() {
     // 'this' refers to the object that the event was called on
     var duration = formatTime(this.duration);
     $(".progressTime.remaining").text(duration);
+  });
+
+  this.audio.addEventListener("timeupdate", function () {
+    // 'this' refers to the object that the event was called on
+    if (this.duration) {
+      updateTimeProgressBar(this);
+    }
   });
 
   this.setTrack = function (track) {
