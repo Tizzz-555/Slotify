@@ -15,40 +15,51 @@ $jsonArray = json_encode($resultArray);
 <script>
 
 $(document).ready(function() {
-  currentPlaylist = <?php echo $jsonArray; ?>;
-  audioElement = new Audio();
-  setTrack(currentPlaylist[0], currentPlaylist, false);
+  currentPlaylist = <?php echo $jsonArray; ?>; // Retrieve the JSON array of song IDs and assign it to the "currentPlaylist" variable
+  audioElement = new Audio(); // Create a new Audio object
+  setTrack(currentPlaylist[0], currentPlaylist, false); // Call the "setTrack" function with the first song ID from the playlist
 });
 
 function setTrack(trackId, newPlaylist, play) {
 
   $.post("includes/handlers/ajax/getSongJson.php", { songId: trackId }, function(data) {
+      // Perform an AJAX POST request to get the song details using the trackId
 
-      var track = JSON.parse(data);
+      var track = JSON.parse(data); // Parse the JSON response and assign it to the "track" variable
 
-      console.log(track);
-      audioElement.setTrack(track.path);
-      audioElement.play();
+      $(".trackName span").text(track.title); // Set the track title in the HTML element with the class "trackName"
+
+      $.post("includes/handlers/ajax/getArtistJson.php", { artistId: track.artist }, function(data) {
+        // Perform an AJAX POST request to get the artist details using the artist ID
+
+        var artist = JSON.parse(data); // Parse the JSON response and assign it to the "artist" variable
+
+        $(".artistName span").text(artist.name); // Set the artist name in the HTML element with the class "artistName"
+      });
+      
+      audioElement.setTrack(track.path); // Set the audio element's track path to the song's path
+      audioElement.play(); // Play the audio element
   });
   
   if(play == true) {
-    audioElement.play();
+    audioElement.play(); // If the "play" parameter is true, play the audio element
   }
 }
 
 function playSong() {
-  $(".controlButton.play").hide();
-  $(".controlButton.pause").show();
+  $(".controlButton.play").hide(); // Hide the play button
+  $(".controlButton.pause").show(); // Show the pause button
 
-  audioElement.play();
+  audioElement.play(); // Play the audio element
 }
 
 function pauseSong() {
-  $(".controlButton.play").show();
-  $(".controlButton.pause").hide();
-  audioElement.pause();
+  $(".controlButton.play").show(); // Show the play button
+  $(".controlButton.pause").hide(); // Hide the pause button
+  audioElement.pause(); // Pause the audio element
 }
 </script>
+
 
 <div id="nowPlayingBarContainer">
   
@@ -62,11 +73,11 @@ function pauseSong() {
 
           <div class="trackInfo">
             <span class="trackName">
-              <span>Happy Birthday</span>
+              <span></span>
             </span>
 
             <span class="artistName">
-              <span>Mattia Beccari</span>
+              <span></span>
             </span>
 
           </div>
