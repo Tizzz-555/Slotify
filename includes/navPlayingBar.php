@@ -18,7 +18,33 @@ $(document).ready(function() {
   currentPlaylist = <?php echo $jsonArray; ?>; // Retrieve the JSON array of song IDs and assign it to the "currentPlaylist" variable
   audioElement = new Audio(); // Create a new Audio object
   setTrack(currentPlaylist[0], currentPlaylist, false); // Call the "setTrack" function with the first song ID from the playlist
+
+  $(".playbackBar .progressBar ").mousedown(function() {
+    mouseDown = true;
+  });
+
+  $(".playbackBar .progressBar ").mousemove(function(e) {
+    if(mouseDown) {
+      timeFromOffset(e, this);
+    };
+  });
+
+  $(".playbackBar .progressBar ").mouseup(function(e) {    
+    timeFromOffset(e, this);
+  });
+
+  $(document).mouseup(function() {
+    mouseDown = false;
+  });
+
+
 });
+
+function timeFromOffset(mouse, progressBar) {
+  var percentage = mouse.offsetX / $(progressBar).width() * 100;
+  var seconds = audioElement.audio.duration * (percentage / 100);
+  audioElement.setTime(seconds);
+}
 
 function setTrack(trackId, newPlaylist, play) {
 
