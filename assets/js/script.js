@@ -33,6 +33,10 @@ function Audio() {
   this.currentlyPlaying; // Property to store the currently playing track (initially undefined)
   this.audio = document.createElement("audio"); // Creating an HTML audio element using document.createElement
 
+  this.audio.addEventListener("ended", function () {
+    nextSong();
+  });
+
   this.audio.addEventListener("canplay", function () {
     // 'this' refers to the object that the event was called on
     var duration = formatTime(this.duration);
@@ -40,7 +44,6 @@ function Audio() {
   });
 
   this.audio.addEventListener("timeupdate", function () {
-    // 'this' refers to the object that the event was called on
     if (this.duration) {
       updateTimeProgressBar(this);
     }
