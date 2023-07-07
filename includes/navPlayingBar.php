@@ -20,6 +20,11 @@ $(document).ready(function() {
   setTrack(currentPlaylist[0], currentPlaylist, false); // Call the "setTrack" function with the first song ID from the playlist
   updateVolumeProgressBar(audioElement.audio);
 
+
+  $("#nowPlayingBarContainer").on("mousedown touchstart mousemove touchmove", function(e) {
+    e.preventDefault();
+  });
+
   // SONG PROGRESS CONTROLS
   $(".playbackBar .progressBar").mousedown(function() {
     mouseDown = true;
