@@ -31,7 +31,7 @@ $(document).ready(function() {
   });
 
   $(".playbackBar .progressBar").mousemove(function(e) {
-    if(mouseDown == true) {
+    if(mouseDown) {
       timeFromOffset(e, this);
     };
   });
@@ -46,7 +46,7 @@ $(document).ready(function() {
   });
 
   $(".volumeBar .progressBar").mousemove(function(e) {
-    if(mouseDown == true) {
+    if(mouseDown) {
 
       var percentage = e.offsetX / $(this).width();
 
@@ -79,6 +79,11 @@ function timeFromOffset(mouse, progressBar) {
 }
 
 function nextSong() {
+  if(repeat) {
+    audioElement.setTime(0);
+    playSong();
+    return;
+  }
   if(currentIndex == currentPlaylist.length - 1) {
     currentIndex = 0;
   } else {
@@ -90,11 +95,11 @@ function nextSong() {
 }
 
 function setTrack(trackId, newPlaylist, play) {
+  currentIndex = currentPlaylist.indexOf(trackId);
+  pauseSong();
 
+  // Perform an AJAX POST request to get the song details using the trackId
   $.post("includes/handlers/ajax/getSongJson.php", { songId: trackId }, function(data) {
-     
-    currentIndex = currentPlaylist.indexOf(trackId);
-    // Perform an AJAX POST request to get the song details using the trackId
       var track = JSON.parse(data); // Parse the JSON response and assign it to the "track" variable
 
       $(".trackName span").text(track.title); // Set the track title in the HTML element with the class "trackName"
@@ -188,7 +193,7 @@ function pauseSong() {
               <img src="assets/images/icons/pause.png" alt="Pause">
             </button>
 
-            <button class="controlButton next" title="Next button">
+            <button class="controlButton next" title="Next button" onclick="nextSong()">
               <img src="assets/images/icons/next.png" alt="Next">
             </button>
 
