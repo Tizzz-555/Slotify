@@ -78,10 +78,23 @@ function timeFromOffset(mouse, progressBar) {
   audioElement.setTime(seconds);
 }
 
+function nextSong() {
+  if(currentIndex == currentPlaylist.length - 1) {
+    currentIndex = 0;
+  } else {
+    currentIndex++;
+  }
+
+  var trackToPlay = currentPlaylist[currentIndex];
+  setTrack(trackToPlay, currentPlaylist, true);
+}
+
 function setTrack(trackId, newPlaylist, play) {
 
   $.post("includes/handlers/ajax/getSongJson.php", { songId: trackId }, function(data) {
-      // Perform an AJAX POST request to get the song details using the trackId
+     
+    currentIndex = currentPlaylist.indexOf(trackId);
+    // Perform an AJAX POST request to get the song details using the trackId
       var track = JSON.parse(data); // Parse the JSON response and assign it to the "track" variable
 
       $(".trackName span").text(track.title); // Set the track title in the HTML element with the class "trackName"
