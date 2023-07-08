@@ -14,10 +14,10 @@ $jsonArray = json_encode($resultArray);
 
 <script>
 
-$(document).ready(function() {
-  currentPlaylist = <?php echo $jsonArray; ?>; // Retrieve the JSON array of song IDs and assign it to the "currentPlaylist" variable
+$(document).ready(function() { 
+  var newPlaylist = <?php echo $jsonArray; ?>; // Retrieve the JSON array of song IDs and assign it to the "currentPlaylist" variable
   audioElement = new Audio(); // Create a new Audio object
-  setTrack(currentPlaylist[0], currentPlaylist, false); // Call the "setTrack" function with the first song ID from the playlist
+  setTrack(newPlaylist[0], newPlaylist, false); // Call the "setTrack" function with the first song ID from the playlist
   updateVolumeProgressBar(audioElement.audio);
 
 
@@ -102,7 +102,7 @@ function nextSong() {
     currentIndex++;
   }
 
-  var trackToPlay = currentPlaylist[currentIndex];
+  var trackToPlay = shuffle ? shufflePlaylist[currentIndex] : currentPlaylist[currentIndex];
   setTrack(trackToPlay, currentPlaylist, true);
 }
 
@@ -122,10 +122,43 @@ function setShuffle() {
   shuffle = !shuffle; 
   var imageName = shuffle ? "shuffle-active.png" : "shuffle.png";
   $(".controlButton.shuffle img").attr("src", "assets/images/icons/" + imageName);
+
+  if(shuffle) {
+    // Randomize playlist
+    shuffleArray(shufflePlaylist);
+    currentIndex = shufflePlaylist.indexOf(audioElement.currentlyPlaying.id);
+  }
+  else {
+    // Shuffle deactivated
+    // Go back to regular playlist
+    currentIndex = currentPlaylist.indexOf(audioElement.currentlyPlaying.id);
+  }
 }
 
+function shuffleArray(a) {
+		var j, x, i;
+		for (i = a.length; i; i--) {
+			j = Math.floor(Math.random() * i);
+			x = a[i - 1];
+			a[i - 1] = a[j];
+			a[j] = x;
+		}
+	}
+
+
 function setTrack(trackId, newPlaylist, play) {
-  currentIndex = currentPlaylist.indexOf(trackId);
+  if(newPlaylist != currentPlaylist) {
+    currentPlaylist = newPlaylist;
+    shufflePlaylist = currentPlaylist.slice();
+    shuffleArray(shufflePlaylist);
+  }
+
+  if(shuffle) {
+    currentIndex = shufflePlaylist.indexOf(trackId);
+  } else {
+    currentIndex = currentPlaylist.indexOf(trackId);
+  }
+  
   pauseSong();
 
   // Perform an AJAX POST request to get the song details using the trackId

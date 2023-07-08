@@ -36,7 +36,7 @@
     }
 
     public function getAlbum() { 
-      return new Album($this->con, $this->albumId);   // Create and return a new Album object using the private 'albumId' property and the passed database connection
+      return new Album($this->con, $this->albumId);
     }
 
     public function getPath() { 
@@ -44,11 +44,11 @@
     }
 
     public function getGenre() { 
-      return $this->genre;   // Return the value of the private 'genre' property
+      return $this->genre;
     }
 
     public function getDuration() { 
-      return $this->duration;   // Return the value of the private 'duration' property
+      return $this->duration;   
     }
      
     public function getMysqliData() { 
