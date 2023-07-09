@@ -45,6 +45,10 @@ function updateVolumeProgressBar(audio) {
   $(".volumeBar .progress").css("width", volume + "%");
 }
 
+function playFirstSong() {
+  setTrack(tempPlaylist[0], tempPlaylist, true);
+}
+
 function Audio() {
   this.currentlyPlaying; // Property to store the currently playing track (initially undefined)
   this.audio = document.createElement("audio"); // Creating an HTML audio element using document.createElement
