@@ -164,29 +164,25 @@ function setTrack(trackId, newPlaylist, play) {
   // Perform an AJAX POST request to get the song details using the trackId
   $.post("includes/handlers/ajax/getSongJson.php", { songId: trackId }, function(data) {
       var track = JSON.parse(data); // Parse the JSON response and assign it to the "track" variable
-
       $(".trackName span").text(track.title); // Set the track title in the HTML element with the class "trackName"
 
       $.post("includes/handlers/ajax/getArtistJson.php", { artistId: track.artist }, function(data) {
-        
         var artist = JSON.parse(data); 
-
         $(".artistName span").text(artist.name); 
       });
 
-      $.post("includes/handlers/ajax/getAlbumJson.php", { albumId: track.album }, function(data) {
-        
+      $.post("includes/handlers/ajax/getAlbumJson.php", { albumId: track.album }, function(data) {   
         var album = JSON.parse(data); 
-
         $(".albumLink img").attr("src", album.artworkPath); 
       });
       
       audioElement.setTrack(track); // Set the audio element's track path to the song's path
-  });
-  
-  if(play) {
-    audioElement.play(); // If the "play" parameter is true, play the audio element
+
+      if(play) {
+        playSong(); // If the "play" parameter is true, play the audio element
   }
+  });
+
 }
 
 function playSong() {
