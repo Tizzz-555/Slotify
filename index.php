@@ -14,13 +14,13 @@ include("includes/includedFiles.php");
       // Iterate through each row (album) fetched from the query result
       
       echo "<div class='gridViewItem'>
-              <a href='album.php?id=" . $row['id'] . "'>
+      <span role='link' tabindex='0' onclick='openPage(\"album.php?id=" . $row['id'] . "\")'>
                 <img src='" . $row['artworkPath'] . "'>
               
                 <div class='gridViewInfo'>"
                   . $row['title'] . 
                 "</div>
-              </a>
+              </span>
               
             </div>";
       // Output the album information in HTML format, including the album ID, artwork path, and title
