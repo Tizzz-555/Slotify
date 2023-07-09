@@ -9,6 +9,7 @@
 
   if(isset($_SESSION['userLoggedIn'])) { // Check if the 'userLoggedIn' key is set in the $_SESSION array
     $userLoggedIn = $_SESSION['userLoggedIn']; // Assign the value of $_SESSION['userLoggedIn'] to $userLoggedIn
+    echo "<script>userLoggedIn = '$userLoggedIn';</script>";
   }
   else {
     header("Location: register.php"); // Redirect the user to the "register.php" page if the 'userLoggedIn' key is not set

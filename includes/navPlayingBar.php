@@ -182,7 +182,6 @@ function setTrack(trackId, newPlaylist, play) {
       });
       
       audioElement.setTrack(track); // Set the audio element's track path to the song's path
-      playSong(); // Play the audio element
   });
   
   if(play) {
