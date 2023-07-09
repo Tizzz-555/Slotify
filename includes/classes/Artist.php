@@ -18,5 +18,17 @@
 			return $artist['name'];
 			// Return the value of the 'name' column from the fetched result
 		}
+
+		public function getSongIds() {
+			$query = mysqli_query($this->con, "SELECT id FROM Songs WHERE artist='$this->id' ORDER BY plays ASC");
+
+			$array = array();
+
+			while($row = mysqli_fetch_array($query)) {
+				array_push($array, $row['id']);
+			}
+
+			return $array;
+		}
 	}
 ?>
