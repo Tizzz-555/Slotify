@@ -14,7 +14,7 @@
  			$this->con = $con;   // Assigning the passed database connection to the private property
  			$this->id = $id;     // Assigning the passed song ID to the private property
 
- 			$query = mysqli_query($this->con, "SELECT * FROM Songs WHERE id='$this->id'");
+ 			$query = mysqli_query($this->con, "SELECT * FROM songs WHERE id='$this->id'");
 			// Query the database using the passed song ID to retrieve all song information from the 'Songs' table
       $this->mysqliData = mysqli_fetch_array($query);
 			// Fetch the result of the query as an associative array

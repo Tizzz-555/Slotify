@@ -1,6 +1,6 @@
 <?php
 // Query to select 10 random song IDs from the Songs table
-$songQuery = mysqli_query($con, "SELECT id FROM Songs ORDER BY RAND() LIMIT 10");
+$songQuery = mysqli_query($con, "SELECT id FROM songs ORDER BY RAND() LIMIT 10");
 
 $resultArray = array(); // Initialize an empty array to store the song IDs
 

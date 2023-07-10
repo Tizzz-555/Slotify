@@ -8,6 +8,10 @@
 			$this->id = $id;     // Assigning the passed artist ID to the private property
 		}
 
+		public function getId() {
+			return $this->id;
+		}
+		
 		public function getName() {
 			$artistQuery = mysqli_query($this->con, "SELECT name FROM artists WHERE id = '$this->id'"); 
 			// Query the database using the passed artist ID to retrieve the artist's name from the 'artists' table
@@ -20,7 +24,7 @@
 		}
 
 		public function getSongIds() {
-			$query = mysqli_query($this->con, "SELECT id FROM Songs WHERE artist='$this->id' ORDER BY plays ASC");
+			$query = mysqli_query($this->con, "SELECT id FROM songs WHERE artist='$this->id' ORDER BY plays ASC");
 
 			$array = array();
 
