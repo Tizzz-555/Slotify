@@ -25,7 +25,6 @@ openPage = (url) => {
 };
 
 createPlaylist = () => {
-  console.log(userLoggedIn);
   let popup = prompt("Please enter the name of your playlist");
 
   if (popup != null) {
@@ -42,6 +41,21 @@ createPlaylist = () => {
   }
 };
 
+deletePlaylist = (playlistId) => {
+  var prompt = confirm("Are you sure you want to delete this playlist?");
+
+  if (prompt) {
+    $.post("includes/handlers/ajax/deletePlaylist.php", {
+      playlistId: playlistId,
+    }).done((error) => {
+      if (error != "") {
+        alert(error);
+        return;
+      }
+      openPage("yourMusic.php");
+    });
+  }
+};
 formatTime = (seconds) => {
   var time = Math.round(seconds);
   var minutes = Math.floor(time / 60);
