@@ -21,8 +21,6 @@ if(isset($_GET['term'])) {
 $('.searchInput').focus();
 
 $(() => {
-  var timer;
-
   $(".searchInput").keyup(() => {
     clearTimeout(timer);
 

@@ -7,8 +7,12 @@ var currentIndex = 0;
 var repeat = false;
 var shuffle = false;
 var userLoggedIn;
+var timer;
 
 openPage = (url) => {
+  if (timer != null) {
+    clearTimeout(timer);
+  }
   // If there is no question mark in the url
   if (url.indexOf("?") == -1) {
     url += "?";
