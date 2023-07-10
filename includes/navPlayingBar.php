@@ -14,8 +14,8 @@ $jsonArray = json_encode($resultArray);
 
 <script>
 
-$(document).ready(function() { 
-  var newPlaylist = <?php echo $jsonArray; ?>; // Retrieve the JSON array of song IDs and assign it to the "currentPlaylist" variable
+$(document).ready(() => { 
+  let newPlaylist = <?php echo $jsonArray; ?>; // Retrieve the JSON array of song IDs and assign it to the "currentPlaylist" variable
   audioElement = new Audio(); // Create a new Audio object
   setTrack(newPlaylist[0], newPlaylist, false); // Call the "setTrack" function with the first song ID from the playlist
   updateVolumeProgressBar(audioElement.audio);
@@ -26,26 +26,26 @@ $(document).ready(function() {
   });
 
   // SONG PROGRESS CONTROLS
-  $(".playbackBar .progressBar").mousedown(function() {
+  $(".playbackBar .progressBar").mousedown(() => {
     mouseDown = true;
   });
 
-  $(".playbackBar .progressBar").mousemove(function(e) {
+  $(".playbackBar .progressBar").mousemove((e) => {
     if(mouseDown) {
       timeFromOffset(e, this);
     };
   });
 
-  $(".playbackBar .progressBar").mouseup(function(e) {    
+  $(".playbackBar .progressBar").mouseup((e) => {    
     timeFromOffset(e, this);
   });
 
   // VOLUME CONTROLS
-  $(".volumeBar .progressBar").mousedown(function() {
+  $(".volumeBar .progressBar").mousedown(() => {
     mouseDown = true;
   });
 
-  $(".volumeBar .progressBar").mousemove(function(e) {
+  $(".volumeBar .progressBar").mousemove((e) => {
     if(mouseDown) {
 
       var percentage = e.offsetX / $(this).width();
@@ -57,7 +57,7 @@ $(document).ready(function() {
     }
   });
 
-  $(".volumeBar .progressBar").mouseup(function(e) {  
+  $(".volumeBar .progressBar").mouseup((e) => {  
     var percentage = e.offsetX / $(this).width();  
 
     if(percentage >= 0 && percentage <= 1) {
@@ -65,20 +65,20 @@ $(document).ready(function() {
       }
   });
 
-  $(document).mouseup(function() {
+  $(document).mouseup(() => {
     mouseDown = false;
   });
 
 
 });
 
-function timeFromOffset(mouse, progressBar) {
+timeFromOffset = (mouse, progressBar) =>  {
   var percentage = mouse.offsetX / $(progressBar).width() * 100;
   var seconds = audioElement.audio.duration * (percentage / 100);
   audioElement.setTime(seconds);
 }
 
-function prevSong() {
+prevSong = () => {
   if(audioElement.audio.currentTime >= 3 || currentIndex == 0) {
     audioElement.setTime(0);
   } else {
@@ -90,7 +90,7 @@ function prevSong() {
   setTrack(trackToPlay, currentPlaylist, true);
 }
 
-function nextSong() {
+nextSong = () => {
   if(repeat) {
     audioElement.setTime(0);
     playSong();
@@ -106,19 +106,19 @@ function nextSong() {
   setTrack(trackToPlay, currentPlaylist, true);
 }
 
-function setRepeat() {
+setRepeat = () => {
   repeat = !repeat;
   var imageName = repeat ? "repeat-active.png" : "repeat.png";
   $(".controlButton.volume img").attr("src", "assets/images/icons/" + imageName);
 }
 
-function setMute() {
+setMute = () => {
   audioElement.audio.muted = !audioElement.audio.muted;
   var imageName = audioElement.audio.muted ? "volume-mute.png" : "volume.png";
   $(".controlButton.volume img").attr("src", "assets/images/icons/" + imageName);
 }
 
-function setShuffle() {
+setShuffle = () => {
   shuffle = !shuffle; 
   var imageName = shuffle ? "shuffle-active.png" : "shuffle.png";
   $(".controlButton.shuffle img").attr("src", "assets/images/icons/" + imageName);
@@ -135,7 +135,7 @@ function setShuffle() {
   }
 }
 
-function shuffleArray(a) {
+shuffleArray = (a) => {
 		var j, x, i;
 		for (i = a.length; i; i--) {
 			j = Math.floor(Math.random() * i);
@@ -146,7 +146,7 @@ function shuffleArray(a) {
 	}
 
 
-function setTrack(trackId, newPlaylist, play) {
+  setTrack = (trackId, newPlaylist, play) =>  {
   if(newPlaylist != currentPlaylist) {
     currentPlaylist = newPlaylist;
     shufflePlaylist = currentPlaylist.slice();
@@ -162,17 +162,17 @@ function setTrack(trackId, newPlaylist, play) {
   pauseSong();
 
   // Perform an AJAX POST request to get the song details using the trackId
-  $.post("includes/handlers/ajax/getSongJson.php", { songId: trackId }, function(data) {
+    $.post("includes/handlers/ajax/getSongJson.php", { songId: trackId }, (data) => {
       var track = JSON.parse(data); // Parse the JSON response and assign it to the "track" variable
       $(".trackName span").text(track.title); // Set the track title in the HTML element with the class "trackName"
 
-      $.post("includes/handlers/ajax/getArtistJson.php", { artistId: track.artist }, function(data) {
+      $.post("includes/handlers/ajax/getArtistJson.php", { artistId: track.artist }, (data) => {
         var artist = JSON.parse(data); 
         $(".artistName span").text(artist.name); 
         $(".artistName span").attr("onclick", "openPage('artist.php?id=" + artist.id + "')"); 
       });
 
-      $.post("includes/handlers/ajax/getAlbumJson.php", { albumId: track.album }, function(data) {   
+      $.post("includes/handlers/ajax/getAlbumJson.php", { albumId: track.album }, (data) => {   
         var album = JSON.parse(data); 
         $(".albumLink img").attr("src", album.artworkPath); 
         $(".albumLink img").attr("onclick", "openPage('album.php?id=" + album.id + "')"); 
@@ -189,7 +189,7 @@ function setTrack(trackId, newPlaylist, play) {
 
 }
 
-function playSong() {
+  playSong = () => {
 
   if(audioElement.audio.currentTime == 0) {
     $.post("includes/handlers/ajax/updatePlays.php", { songId: audioElement.currentlyPlaying.id });
@@ -201,7 +201,7 @@ function playSong() {
   audioElement.play(); 
 }
 
-function pauseSong() {
+ pauseSong = () => {
   $(".controlButton.play").show(); 
   $(".controlButton.pause").hide(); 
   audioElement.pause();

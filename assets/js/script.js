@@ -8,7 +8,7 @@ var repeat = false;
 var shuffle = false;
 var userLoggedIn;
 
-function openPage(url) {
+openPage = (url) => {
   // If there is no question mark in the url
   if (url.indexOf("?") == -1) {
     url += "?";
@@ -18,9 +18,9 @@ function openPage(url) {
   $("#mainContent").load(encodedUrl);
   $("body").scrollTop(0);
   history.pushState(null, null, url);
-}
+};
 
-function formatTime(seconds) {
+formatTime = (seconds) => {
   var time = Math.round(seconds);
   var minutes = Math.floor(time / 60);
   var seconds = time - minutes * 60;
@@ -28,9 +28,9 @@ function formatTime(seconds) {
   var extraZero = seconds < 10 ? "0" : "";
 
   return minutes + ":" + extraZero + seconds;
-}
+};
 
-function updateTimeProgressBar(audio) {
+updateTimeProgressBar = (audio) => {
   $(".progressTime.current").text(formatTime(audio.currentTime));
   $(".progressTime.remaining").text(
     formatTime(audio.duration - audio.currentTime)
@@ -38,16 +38,16 @@ function updateTimeProgressBar(audio) {
 
   var progress = (audio.currentTime / audio.duration) * 100;
   $(".playbackBar .progress").css("width", progress + "%");
-}
+};
 
-function updateVolumeProgressBar(audio) {
+updateVolumeProgressBar = (audio) => {
   var volume = audio.volume * 100;
   $(".volumeBar .progress").css("width", volume + "%");
-}
+};
 
-function playFirstSong() {
+playFirstSong = () => {
   setTrack(tempPlaylist[0], tempPlaylist, true);
-}
+};
 
 function Audio() {
   this.currentlyPlaying; // Property to store the currently playing track (initially undefined)
