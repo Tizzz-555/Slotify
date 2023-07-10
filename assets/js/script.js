@@ -24,17 +24,21 @@ openPage = (url) => {
   history.pushState(null, null, url);
 };
 
-createPlaylist = (username) => {
-  let alert = prompt("Please enter the name of your playlist");
+createPlaylist = () => {
+  console.log(userLoggedIn);
+  let popup = prompt("Please enter the name of your playlist");
 
-  if (alert != null) {
-    $ /
-      postMessage("includes/handlers/ajax/createPlaylist.php", {
-        name: alert,
-        username: username,
-      }).done(function () {
-        openPage("yourMusic.php");
-      });
+  if (popup != null) {
+    $.post("includes/handlers/ajax/createPlaylist.php", {
+      name: popup,
+      username: userLoggedIn,
+    }).done((error) => {
+      if (error != "") {
+        alert(error);
+        return;
+      }
+      openPage("yourMusic.php");
+    });
   }
 };
 

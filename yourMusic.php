@@ -1,14 +1,14 @@
 <?php 
-include('includes/includedFiles.php');
+include("includes/includedFiles.php");
 ?>
 
-<div class='playlistContainer'>
+<div class="playlistContainer">
 
-	<div class='gridViewContainer'>
+	<div class="gridViewContainer">
 		<h2>PLAYLISTS</h2>
 
-		<div class='buttonItems'>
-			<button class='button green'>NEW PLAYLIST</button>
+		<div class="buttonItems">
+			<button class="button green" onclick="createPlaylist()">NEW PLAYLIST</button>
 		</div>
 	</div>
 	
