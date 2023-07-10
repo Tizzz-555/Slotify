@@ -96,7 +96,7 @@ $artist = new Artist($con, $artistId);
 	<h2>ALBUMS</h2>
 	
 	<?php 
-		$albumQuery = mysqli_query($con, "SELECT * FROM Albums WHERE artist='$artistId'");
+		$albumQuery = mysqli_query($con, "SELECT * FROM albums WHERE artist='$artistId'");
 
 		while($row = mysqli_fetch_array($albumQuery)) {
 
