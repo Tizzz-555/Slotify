@@ -54,7 +54,7 @@ $artist = $album->getArtist();
 
 
               <div class='trackOptions'> 
-                <img class='optionsButton' src='assets/images/icons/more.png' >
+                <img class='optionsButton' src='assets/images/icons/more.png' onclick='showOptionsMenu(this)' >
               </div>
 
 
