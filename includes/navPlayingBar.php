@@ -73,7 +73,7 @@ $(document).ready(() => {
 });
 
 timeFromOffset = (mouse, progressBar) =>  {
-  var percentage = mouse.offsetX / $(progressBar).width() * 100;
+  var percentage = mouse.offsetX / $('.progressBar').width() * 100;
   var seconds = audioElement.audio.duration * (percentage / 100);
   audioElement.setTime(seconds);
 }
@@ -109,7 +109,7 @@ nextSong = () => {
 setRepeat = () => {
   repeat = !repeat;
   var imageName = repeat ? "repeat-active.png" : "repeat.png";
-  $(".controlButton.volume img").attr("src", "assets/images/icons/" + imageName);
+  $(".controlButton.repeat img").attr("src", "assets/images/icons/" + imageName);
 }
 
 setMute = () => {
