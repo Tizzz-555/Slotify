@@ -48,7 +48,7 @@ $(document).ready(() => {
   $(".volumeBar .progressBar").mousemove((e) => {
     if(mouseDown) {
 
-      var percentage = e.offsetX / $(this).width();
+      var percentage = e.offsetX / $(".volumeBar .progressBar").width();
 
       if(percentage >= 0 && percentage <= 1) {
         audioElement.audio.volume = percentage;
@@ -58,7 +58,7 @@ $(document).ready(() => {
   });
 
   $(".volumeBar .progressBar").mouseup((e) => {  
-    var percentage = e.offsetX / $(this).width();  
+    var percentage = e.offsetX / $(".volumeBar .progressBar").width();  
 
     if(percentage >= 0 && percentage <= 1) {
         audioElement.audio.volume = percentage;
