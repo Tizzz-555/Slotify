@@ -66,7 +66,7 @@ removeFromPlaylist = (button, playlistId) => {
       alert(error);
       return;
     }
-    openPage("playlist.phpid=" + playlistId);
+    openPage("playlist.php?id=" + playlistId);
   });
 };
 createPlaylist = () => {
