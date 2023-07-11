@@ -49,23 +49,24 @@ $artist = new Artist($con, $artistId);
 			$albumSong = new Song($con, $songId);
 			$albumArtist = $albumSong->getArtist();
 
-			echo "<li class = 'tracklistRow'>
+			echo "<li class='tracklistRow'>
 
-					<div class = 'trackCount'>
-						<img class = 'play' src = 'assets/images/icons/play-white.png' onclick = 'setTrack(\"" . $albumSong->getId() . "\", tempPlaylist, true)'>
-						<span class = 'trackNumber' >$i</span>
+					<div class='trackCount'>
+						<img class='play' src='assets/images/icons/play-white.png' onclick='setTrack(\"" . $albumSong->getId() . "\", tempPlaylist, true)'>
+						<span class='trackNumber'>$i</span>
 					</div>
 
 
-					<div class = 'trackInfo'>
+					<div class='trackInfo'>
 						<span class='trackName'>" . $albumSong->getTitle() . "</span>
 						<span class='artistName'>" . $albumArtist->getName() . "</span>
 					</div>
 
 
-					<div class='trackOptions'> 
-						<img class='optionsButton' src='assets/images/icons/more.png'>
-					</div>
+					<div class='trackOptions'>
+            <input type='hidden' class='songId' value='" . $albumSong->getId() . "'>
+            <img class='optionsButton' src='assets/images/icons/more.png' onclick='showOptionsMenu(this)' >
+          </div>
 
 
 					<div class='trackDuration'>
@@ -100,11 +101,11 @@ $artist = new Artist($con, $artistId);
 
 		while($row = mysqli_fetch_array($albumQuery)) {
 
-			echo "<div class = 'gridViewItem'>
-					<span role = 'link' tabindex = '0' onclick = 'openPage(\"album.php?id=" . $row['id'] . "\")'>
-						<img src = '" . $row['artworkPath'] . "'>
+			echo "<div class='gridViewItem'>
+					<span role='link' tabindex='0' onclick='openPage(\"album.php?id=" . $row['id'] . "\")'>
+						<img src='" . $row['artworkPath'] . "'>
 
-						<div class = 'gridViewInfo'>"
+						<div class='gridViewInfo'>"
 						. $row['title'] .
 						"</div>
 					</span>
@@ -114,3 +115,8 @@ $artist = new Artist($con, $artistId);
 	?>
 
 </div>
+
+<nav class="optionsMenu">
+  <input type="hidden" class="songId">
+  <?php echo Playlist::getPlaylistsDropdown($con, $userLoggedIn->getUsername()); ?>
+</nav>
